@@ -79,7 +79,8 @@ class RESTAssistant:
 
         local_headers.update(headers)
 
-        data = json.dumps(data) if data is not None else data
+        if method != RESTMethod.GET and local_headers.get("Content-Type") == "application/json":
+            data = json.dumps(data) if data is not None else data
 
         request = RESTRequest(
             method=method,
